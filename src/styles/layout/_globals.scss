@@ -1,0 +1,42 @@
+@import "../core/settings";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap');
+
+* {
+ box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $background;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-size: 18px;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  // font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $font;
+}
+
+input {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+button {
+  cursor: pointer;
+  outline: 0;
+}
+
+input {
+  outline: 0;
+}

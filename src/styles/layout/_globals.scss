@@ -1,5 +1,7 @@
 @import "../core/settings";
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap');
+@import "../core/animations";
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
 * {
  box-sizing: border-box;
@@ -12,7 +14,7 @@ html {
 }
 
 body {
-  background-color: $background;
+  background-color: $white;
   margin: 0;
   padding: 0;
   line-height: 1;
@@ -20,15 +22,15 @@ body {
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
-  // font-family: 'Roboto', sans-serif;
-  font-family: 'Roboto', sans-serif;
+  // font-family: 'Rubik', sans-serif;
+  font-family: 'Rubik', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $font;
 }
 
 input {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 14px;
 }
 

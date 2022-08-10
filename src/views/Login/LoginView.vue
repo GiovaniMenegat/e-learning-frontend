@@ -1,54 +1,40 @@
 <template>
-  <div class="login">
-    <div class="login-left">
+  <div class="welcome">
+    <div class="welcome-left">
 
-      <h1>Bem vindo ao</h1>
-      <img alt="e.learning logo" src="@/assets/elearning.png">
+      <h1 class="animate pop">Bem vindo ao</h1>
+      <img class="animate pop" alt="e.learning logo" src="@/assets/elearning.png">
       
-      <form action="">
-        <div class="email">
-            <label for="email">Usuário</label>
-            <input type="text" id="email" name="email" v-model="email">
-        </div>
-
-        <div class="password">
-            <label for="password">Senha</label>
-            <input type="password" id="password" name="password" v-model="password">
-        </div>
-
-        <a href="#" class="forgot-password">Esqueci minha senha</a>
-
-        <button @click.prevent="login">
-            Entrar
-        </button>
-      </form>
+      <LoginForm />
+      <SignUpForm />
+      
     </div>
-    <div class="login-right">
+    <div class="welcome-right">
+
+      <img class="animate glow delay-1" alt="vector welcome" src="@/assets/vector-welcome.png">
+
+      <h2 class="animate glow delay-2">Aprenda da melhor forma</h2>
+      <p class="animate glow delay-3">Entre na plataforma e dê seu primeiro passo na programação.</p>
     </div>
   </div>
 </template>
 
 <script>
+import LoginForm from "@/components/LoginForm.vue";
+import SignUpForm from "@/components/SignUpForm.vue";
 
 export default {
-  name: 'LoginView',
-  data() {
-    return {
-      email: '',
-      password: ''
-    }
-  },
-  methods: {
-    login() {
-      console.log('logou');
-    }
-  }
+  name: 'WelcomeView',
+  components: {
+    LoginForm,
+    SignUpForm
+}
 }
 </script>
 
 <style lang="scss">
     @import "../../styles/layout/globals";
-  .login {
+  .welcome {
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -59,6 +45,14 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      h1 {
+        font-size: 54px;
+      }
+
+      img {
+        margin: 30px 0;
+      }
 
       form {
         margin-top: 30px;
@@ -77,7 +71,7 @@ export default {
             width: 250px;
             padding: 10px;
             border-radius: 6px;
-            border: 1px solid $black;
+            border: 1px solid #9f9f9f;
 
             &:focus {
               border: 1px solid $pink;
@@ -93,8 +87,50 @@ export default {
           font-size: 14px;
           text-align: end;
           text-decoration: none;
-          margin: 8px 0;
+          margin: 16px 0;
           color: $pink;
+          font-weight: 700;
+          outline: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        button {
+          background: $black;
+          color: #fff;
+          height: 42px;
+          border: 1px solid $black;
+          border-radius: 6px;
+          font-weight: 700;
+          font-size: 16px;
+
+          &:hover {
+            opacity: 0.8;
+            webkit-transition: opacity .15s ease-in-out;
+            -moz-transition: opacity .15s ease-in-out;
+            -ms-transition: opacity .15s ease-in-out;
+            -o-transition: opacity .15s ease-in-out;
+            transition: opacity .15s ease-in-out;
+          }
+        }
+
+        .create-account {
+          font-size: 14px;
+          text-align: center;
+          margin-top: 16px;
+
+          a {
+            text-decoration: none;
+            color: $pink;
+            font-weight: 700;
+            outline: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
         }
       }
     }
@@ -102,6 +138,32 @@ export default {
     &-right {
       background-color: $black;
       width: 50vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: $white;
+
+      h2 {
+        font-size: 3vw;
+        margin: 26px 0;
+      }
+
+      p {
+        max-width: 600px;
+        text-align: center;
+        font-size: 1.8vw;
+      }
+    }
+
+    @media screen and (max-width: 992px) {
+      &-left {
+        width: 100vw;
+      }
+
+      &-right {
+        display: none;
+      }
     }
   }
 </style>

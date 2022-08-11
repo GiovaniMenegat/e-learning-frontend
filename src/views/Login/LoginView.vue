@@ -5,8 +5,8 @@
       <h1 class="animate pop">Bem vindo ao</h1>
       <img class="animate pop" alt="e.learning logo" src="@/assets/elearning.png">
       
-      <LoginForm />
-      <SignUpForm />
+      <LoginForm @toggle-form="toggleFormOnClick" :toggleFormProp="toggleForm" />
+      <SignUpForm @toggle-form="toggleFormOnClick" :toggleFormProp="toggleForm"/>
       
     </div>
     <div class="welcome-right">
@@ -25,10 +25,20 @@ import SignUpForm from "@/components/SignUpForm.vue";
 
 export default {
   name: 'WelcomeView',
+  data(){
+    return {
+      toggleForm: true
+    }
+  },
   components: {
     LoginForm,
     SignUpForm
-}
+  },
+  methods: {
+    toggleFormOnClick() {
+      this.toggleForm = !this.toggleForm;
+    }
+  }
 }
 </script>
 
@@ -45,6 +55,27 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      .back-button {
+        flex-direction: initial;
+        align-items: center;
+        svg {
+          color: $pink;
+          margin-right: 8px;
+        }
+        a {
+          text-decoration: none;
+          margin: 16px 0;
+          color: $pink;
+          font-size: 14px;
+          font-weight: 700;
+          outline: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
 
       h1 {
         font-size: 54px;
@@ -114,6 +145,10 @@ export default {
             -o-transition: opacity .15s ease-in-out;
             transition: opacity .15s ease-in-out;
           }
+        }
+
+        .sign-up-button {
+          margin-top: 30px;
         }
 
         .create-account {

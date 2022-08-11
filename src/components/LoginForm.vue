@@ -1,5 +1,5 @@
 <template>
-  <form action="">
+  <form action="" v-if="toggleFormProp">
     <div class="email animate pop">
         <label for="email">Usuário</label>
         <input type="text" id="email" name="email" v-model="email">
@@ -16,7 +16,7 @@
         Entrar
     </button>
 
-    <p class="create-account animate pop delay-4">Não tem conta? <a href="#">Cadastre-se</a></p>
+    <p class="create-account animate pop delay-4">Não tem conta? <a href="#" @click="showSignUp">Cadastre-se</a></p>
   </form>
 </template>
 
@@ -29,9 +29,15 @@ export default {
       password: ''
     }
   },
+  props: {
+    toggleFormProp: Boolean
+  },
   methods: {
     login() {
       console.log('logou');
+    },
+    showSignUp() {
+      this.$emit('toggle-form');
     }
   }
 }

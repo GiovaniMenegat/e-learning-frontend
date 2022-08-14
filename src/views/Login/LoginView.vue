@@ -87,6 +87,7 @@ export default {
 
       form {
         margin-top: 30px;
+        max-width: 250px;
         display: flex;
         flex-direction: column;
         div {
@@ -166,6 +167,16 @@ export default {
               text-decoration: underline;
             }
           }
+        }
+
+        .input-error {
+          border: 1px solid $error;
+        }
+
+        .field-error {
+          font-size: 14px;
+          margin-top: 8px;
+          color: $error;
         }
       }
     }

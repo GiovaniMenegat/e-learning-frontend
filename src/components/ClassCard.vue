@@ -2,21 +2,24 @@
   <div class="class-card">
 
     <div class="class-card-img">
-      <img class="" alt="vector welcome" src="@/assets/vector-welcome.png"/>
+      <PrismicImage :field="image" />
     </div>
     
     <div class="class-card-text">
-      <h3>classcard</h3>
-      <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad, quam quod 
-        quidem officia vitae similique excepturi beatae mollitia.
-      </p>
+      <PrismicRichText :field="title" />
+      <PrismicRichText :field="content" />
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: "ClassCard"
+  name: "ClassCard",
+  props: {
+    title: Array,
+    image: Object,
+    video: Object,
+    content: Array
+  }
 }
 </script>
 <style lang="scss">
@@ -25,7 +28,8 @@ export default {
     align-items: center;
     justify-content: space-between;
     
-    max-width: 1000px;
+    max-width: 870px;
+    min-height: 187px;
     margin: 30px;
     box-shadow: 0px 10px 20px 10px rgba(0, 0, 0, 0.10);
     background: #fff;
@@ -58,7 +62,7 @@ export default {
 
     &-text {
 
-      h3 {
+      h2 {
         font-size: 28px;
         margin-bottom: 12px;
       }
@@ -66,6 +70,19 @@ export default {
       p {
         color: #6a6a6a;
       }
+    }
+
+    @media screen and (max-width: 600px) {
+      &-text {
+
+      h2 {
+        font-size: 18px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
     }
   }
 </style>

@@ -1,25 +1,26 @@
 <template>
-  <div class="class-card">
-
-    <div class="class-card-img">
-      <PrismicImage :field="image" />
+  <router-link class="router-link" :to="`/aula/${slugs}`">
+    <div class="class-card">
+      <div class="class-card-img">
+        <PrismicImage :field="image" />
+      </div>
+      
+      <div class="class-card-text">
+        <PrismicRichText :field="title" />
+        <PrismicRichText :field="content" />
+      </div>
     </div>
-    
-    <div class="class-card-text">
-      <PrismicRichText :field="title" />
-      <PrismicRichText :field="content" />
-    </div>
-  </div>
+  </router-link>
 </template>
 <script>
 export default {
   name: "ClassCard",
   props: {
+    slugs: String,
     title: Array,
     image: Object,
-    video: Object,
     content: Array
-  }
+  },
 }
 </script>
 <style lang="scss">

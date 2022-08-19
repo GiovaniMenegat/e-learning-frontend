@@ -1,5 +1,6 @@
 @import "../core/settings";
 @import "../core/animations";
+@import "../core/loading";
 
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -32,6 +33,7 @@ body {
 input {
   font-family: 'Rubik', sans-serif;
   font-size: 14px;
+  outline: 0;
 }
 
 button {
@@ -39,6 +41,7 @@ button {
   outline: 0;
 }
 
-input {
-  outline: 0;
+.router-link {
+  text-decoration: none;
+  color: inherit;
 }

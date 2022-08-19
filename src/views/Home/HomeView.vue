@@ -6,9 +6,9 @@
       <ClassCard 
         v-for="card in cards" 
         :key="card.id" 
+        :slugs="card.slugs[0]"
         :title="card.data.title" 
-        :image="card.data.image" 
-        :video="card.data.embed" 
+        :image="card.data.image"
         :content="card.data.content"
       />
 

@@ -4,20 +4,20 @@
     <font-awesome-icon :icon="['fas', 'chevron-left']" />
     <a href="#" @click="showLogin">Voltar</a>
   </div>
-    
-    <div class="name animate pop delay-1" :class="{ 'form-group--error': $v.name.$error }">
+
+    <div :class="['name animate pop delay-1', {'form-group--error': $v.name.$error}]">
         <label for="name">Usuário</label>
         <input type="text" id="name" name="name" v-model="name" :class="{ 'input-error': (!$v.name.required || !$v.name.alpha) && $v.name.$dirty }">
         <span v-if="(!$v.name.required || !$v.name.alpha) && $v.name.$dirty" class="field-error">Nome inválido</span>
     </div>
 
-    <div class="email animate pop delay-2" :class="{ 'form-group--error': $v.email.$error }">
+    <div :class="['email animate pop delay-2', { 'form-group--error': $v.email.$error }]">
         <label for="email">E-mail</label>
         <input type="text" id="email" name="email" v-model="email" :class="{ 'input-error': (!$v.email.required || !$v.email.alpha) && $v.email.$dirty }">
         <span v-if="(!$v.email.required || !$v.email.alpha) && $v.email.$dirty" class="field-error">E-mail inválido</span>
     </div>
 
-    <div class="password animate pop delay-3" :class="{ 'form-group--error': $v.password.$error }">
+    <div :class="['password animate pop delay-3', { 'form-group--error': $v.password.$error }]">
         <label for="password">Senha</label>
         <input type="password" id="password" name="password" v-model="password" :class="{ 'input-error': (!$v.password.required && $v.password.$dirty) || (!$v.password.minLength && $v.password.$dirty) }">
         <span v-if="!$v.password.required && $v.password.$dirty" class="field-error">Senha inválida</span>

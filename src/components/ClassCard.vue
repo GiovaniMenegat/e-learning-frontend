@@ -8,6 +8,16 @@
       <div class="class-card-text">
         <PrismicRichText :field="title" />
         <PrismicRichText :field="content" />
+
+        <div class="class-card-key-text">
+          <p 
+            v-for="(key, index) in keyTexts" 
+            :key="index"
+          >
+            {{key.key_text1}}
+          </p>
+        </div>
+
       </div>
     </div>
   </router-link>
@@ -19,8 +29,9 @@ export default {
     slugs: String,
     title: Array,
     image: Object,
-    content: Array
-  },
+    content: Array,
+    keyTexts: Array
+  }
 }
 </script>
 <style lang="scss">
@@ -71,6 +82,27 @@ export default {
       p {
         color: #6a6a6a;
       }
+    }
+
+    &-key-text {
+      display: flex;
+      align-items: center;
+      margin-top: 25px;
+
+      p {
+        font-size: 16px;
+        color: #a3a3a3;
+        transition: color 0.2s;
+
+        & + p {
+          margin-left: 14px;
+        }
+
+        &:hover {
+          color: #6a6a6a;
+        }
+      }
+
     }
 
     @media screen and (max-width: 600px) {

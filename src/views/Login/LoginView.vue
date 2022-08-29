@@ -2,7 +2,7 @@
   <div class="welcome">
     <div class="welcome-left">
 
-      <h1 class="animate pop">Bem vindo ao</h1>
+      <h1 class="animate pop">Bem-vindo ao</h1>
       <img class="animate pop" alt="e.learning logo" src="@/assets/elearning.png">
       
       <LoginForm @toggle-form="toggleFormOnClick" :toggleFormProp="toggleForm" />

@@ -12,7 +12,7 @@
         >
       </div>
       
-      <div class="cards" v-if="filteredCards && filteredCards.length > 0">
+      <div class="cards" v-if="!loading && filteredCards && filteredCards.length > 0">
         <ClassCard 
           v-for="(card, index) in filteredCards" 
           :key="index" 
@@ -23,6 +23,11 @@
           :keyTexts="card.data.key_field"
         />
       </div>
+
+      <div class="loading" v-else-if="loading">
+        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+      </div>
+
       <div class="empty-message" v-else>
         <h6>Não encontramos um resultado para sua busca :(</h6>
       </div>
@@ -41,7 +46,8 @@ export default {
     return {
       cards: null,
       searchText: '',
-      arrayFiltrado: null
+      arrayFiltrado: null,
+      loading: true
     }
   },
   components: {
@@ -54,6 +60,7 @@ export default {
         this.$prismic.predicate.at('document.type','class')
       );
       this.cards = results;
+      this.loading = false;
     }
   },
   created() {

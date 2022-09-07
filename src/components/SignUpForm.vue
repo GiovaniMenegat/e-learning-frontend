@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import { required, minLength, email, alpha } from 'vuelidate/lib/validators'
+import { required, minLength, email, alpha } from 'vuelidate/lib/validators';
+import api from "@/services/api";
 
 export default {
   name: 'SugnUpForm',
@@ -67,6 +68,16 @@ export default {
 
       if (!this.$v.$invalid) {
         console.log(`Name: ${this.name}, Email: ${this.email}, Password: ${this.password}`);
+
+        api
+          .post("/user", {name: this.name, email: this.email, password: this.password})
+          .then(() => {
+            this.$emit('toggle-form');
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+        
       }
     },
     showLogin() {

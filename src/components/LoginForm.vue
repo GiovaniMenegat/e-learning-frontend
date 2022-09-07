@@ -24,7 +24,8 @@
 </template>
 
 <script>
-import { required, minLength, email } from 'vuelidate/lib/validators'
+import { required, minLength, email } from 'vuelidate/lib/validators';
+import api from "@/services/api";
 
 export default {
   name: 'LoginForm',
@@ -49,11 +50,20 @@ export default {
   },
   methods: {
     login() {
-      console.log('logou');
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
         console.log(`Email: ${this.email}, Password: ${this.password}`);
+
+        api
+          .post("/user/login", {email: this.email, password: this.password})
+          .then(() => {
+            this.$router.push({name: 'home'}) 
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+        
       }
     },
     showSignUp() {

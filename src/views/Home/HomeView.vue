@@ -11,7 +11,7 @@
           v-model="searchText"
         >
       </div>
-      
+
       <div class="cards" v-if="!loading && filteredCards && filteredCards.length > 0">
         <ClassCard 
           v-for="(card, index) in filteredCards" 
@@ -116,6 +116,13 @@ export default {
           &:focus {
             border: 1px solid $pink;
           }
+        }
+      }
+
+      .empty-message {
+        h6 {
+          font-size: 28px;
+          margin-top: 40px;
         }
       }
     }

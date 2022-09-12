@@ -57,7 +57,9 @@ export default {
 
         api
           .post("/user/login", {email: this.email, password: this.password})
-          .then(() => {
+          .then(({data}) => {
+            console.log(data);
+            this.$store.dispatch('setUser', data.name);
             this.$router.push({name: 'home'}) 
           })
           .catch((error) => {

@@ -6,16 +6,15 @@ import PrismicVue from '@prismicio/vue'
 import Vuelidate from 'vuelidate'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faChevronLeft, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faChevronLeft, faCheck, faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import store from './store'
 
-library.add(faUser, faChevronLeft, faCheck);
+library.add(faUser, faChevronLeft, faCheck, faBars);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.use(Vuelidate);
 
 // Prismic configuration
-
 const endpoint = process.env.VUE_APP_PRISMIC_ENDPOINT;
 
 const routes = [

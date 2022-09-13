@@ -13,6 +13,17 @@
       </button>
     </div>
 
+    <div class="top-buttons feedback-button-div">
+      <button class="feedback negative">
+        <font-awesome-icon :icon="['fas', 'thumbs-down']" />
+        Não Gostei
+      </button>
+      <button class="feedback positive">
+        <font-awesome-icon :icon="['fas', 'thumbs-up']" />
+        Gostei
+      </button>
+    </div>
+
     <div v-if="loading" class="class-body">
       <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
     </div>
@@ -97,6 +108,35 @@ export default {
           background-color: #008000a1;
           transition: background-color .15s ease-in-out;
         }
+      }
+    }
+
+    .feedback-button-div {
+      justify-content: flex-end;
+
+      svg {
+        margin-right: 8px;
+        color: #ff6680;
+      }
+
+      .feedback {
+        display: flex;
+        align-items: center;
+        background-color: #32373b;
+        border: 1px solid #ff6680;
+        padding: 10px;
+        border-radius: 6px;
+        color: #edf2ef;
+        font-weight: 600;
+
+        &:hover {
+          background-color: #32373bd6;
+          transition: background-color .15s ease-in-out;
+        }
+      }
+
+      .negative {
+        margin-right: 10px;
       }
     }
 

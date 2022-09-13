@@ -57,7 +57,9 @@ export default {
   methods: {
     async getContent() {
       const { results } = await this.$prismic.client.query(
-        this.$prismic.predicate.at('document.type','class')
+        this.$prismic.predicate.at('document.type','class'), {
+          orderings: '[my.class.order]',
+        }
       );
       this.cards = results;
       this.loading = false;
@@ -75,12 +77,11 @@ export default {
 
         this.cards.filter(card => {
           card.data.key_field.map(tag => {
-            if (tag.key_text1.includes(this.searchText.toLowerCase())) {
+            if (tag.key_text.includes(this.searchText.toLowerCase())) {
               let found = filteredArray.some(el => el.id === card.id);
               if (!found) {
                 filteredArray.push(card);
               }
-            console.log(filteredArray);
             } else {
               return this.cards;
             }

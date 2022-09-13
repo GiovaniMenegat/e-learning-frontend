@@ -14,7 +14,7 @@
             v-for="(key, index) in keyTexts" 
             :key="index"
           >
-            {{key.key_text1}}
+            {{key.key_text}}
           </p>
         </div>
 

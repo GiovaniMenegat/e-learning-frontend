@@ -12,15 +12,14 @@
         >
       </div>
 
-      <div class="cards" v-if="!loading && filteredCards && filteredCards.length > 0">
+      <div class="cards" v-if="!loading && cards && cards.length > 0">
         <ClassCard 
-          v-for="(card, index) in filteredCards" 
+          v-for="(card, index) in cards" 
           :key="index" 
-          :slugs="card.slugs[0]"
-          :title="card.data.title" 
-          :image="card.data.image"
-          :content="card.data.content"
-          :keyTexts="card.data.key_field"
+          :id="card.id"
+          :title="card.name" 
+          :content="card.description"
+          :keyTexts="card.tags"
         />
       </div>
 
@@ -39,6 +38,7 @@
 <script>
 import Header from "@/components/HeaderHome.vue";
 import ClassCard from "@/components/ClassCard.vue";
+import api from "@/services/api";
 
 export default {
   name: 'HomeView',
@@ -56,12 +56,19 @@ export default {
   },
   methods: {
     async getContent() {
-      const { results } = await this.$prismic.client.query(
-        this.$prismic.predicate.at('document.type','class'), {
-          orderings: '[my.class.order]',
-        }
-      );
-      this.cards = results;
+      api
+          .get("/class")
+          .then(({data}) => {
+            console.log(data.classes);
+            this.cards = data.classes;
+            // this.$store.dispatch('setUser', data.name);
+            // this.$router.push({name: 'home'}) 
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+      
+
       this.loading = false;
     }
   },

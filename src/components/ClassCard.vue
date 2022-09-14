@@ -1,21 +1,21 @@
 <template>
-  <router-link class="router-link" :to="`/aula/${slugs}`">
+  <router-link class="router-link" :to="`/aula/${id}`">
     <div class="class-card">
       <div class="class-card-img">
-        <PrismicImage :field="image" />
+        <img :src="require(`@/assets/${image}.svg`)" :alt="`${title}`">
       </div>
       
       <div class="class-card-text">
-        <PrismicRichText :field="title" />
-        <PrismicRichText :field="content" />
+        <h2>{{title}}</h2>
+        <p>{{content}}</p>
 
         <div class="class-card-key-text">
-          <p 
+          <!-- <p 
             v-for="(key, index) in keyTexts" 
             :key="index"
           >
             {{key.key_text}}
-          </p>
+          </p> -->
         </div>
 
       </div>
@@ -23,14 +23,21 @@
   </router-link>
 </template>
 <script>
+import slugify from "@/helpers/helpers";
+
 export default {
   name: "ClassCard",
+  data() {
+    return {
+      image: slugify(this.title)
+    }
+  },
   props: {
-    slugs: String,
-    title: Array,
-    image: Object,
-    content: Array,
-    keyTexts: Array
+    id: Number,
+    title: String,
+    // image: Object,
+    content: String,
+    keyTexts: String
   }
 }
 </script>

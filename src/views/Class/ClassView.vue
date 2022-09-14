@@ -29,17 +29,20 @@
     </div>
     
     <div v-if="!loading" class="class-body">
-      <PrismicRichText :field="classContent.title" />
+      <h2>{{classContent && classContent.name}}</h2>
       
-      <PrismicEmbed :field="classContent.embed" />
+      <iframe width="420" height="315"
+        :src="`https://www.youtube.com/embed/${classContent && classContent.video_id}`">
+      </iframe>
 
-      <PrismicRichText :field="classContent.content" />
+      <p>{{classContent && classContent.description}}</p>
     </div>
   </div>
 </template>
 
 <script>
 import Header from "@/components/HeaderHome.vue";
+import api from "@/services/api";
 
 export default {
   name: "ClassView",
@@ -54,9 +57,18 @@ export default {
   },
   methods: {
     async getContent() {
-      const { data } = await this.$prismic.client.getByUID('class', String(this.$route.params.slug));
+      api
+          .get(`/class/${this.$route.params.id}`)
+          .then(({data}) => {
+            this.classContent = data;
+            // this.$store.dispatch('setUser', data.name);
+            // this.$router.push({name: 'home'}) 
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+
       this.loading = false;
-      this.classContent = data;
     }
   },
   created() {

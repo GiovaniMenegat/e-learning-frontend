@@ -60,6 +60,7 @@ export default {
           .then(({data}) => {
             console.log(data);
             this.$store.dispatch('setUser', data.name);
+            this.$store.dispatch('setToken', data.token);
             this.$router.push({name: 'home'}) 
           })
           .catch((error) => {

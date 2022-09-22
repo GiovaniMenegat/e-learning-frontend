@@ -12,18 +12,26 @@ const vuexLocalStorage = new VuexPersist({
 export default new Vuex.Store({
   state: {
     user: '',
+    token: ''
   },
   getters: {
     getUser: state => state.user,
+    getToken: state => state.token,
   },
   mutations: {
     setUser(state, payload) {
       state.user = payload;
     },
+    setToken(state, payload) {
+      state.token = payload;
+    },
   },
   actions: {
     setUser({ commit }, payload) {
       commit('setUser', payload);
+    },
+    setToken({ commit }, payload) {
+      commit('setToken', payload);
     },
   },
   modules: {

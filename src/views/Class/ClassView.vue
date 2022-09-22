@@ -14,11 +14,11 @@
     </div>
 
     <div class="top-buttons feedback-button-div">
-      <button class="feedback negative">
+      <button :class="['feedback negative', {'feedback-disabled': rating === 1}, {'feedback-cursor-default': rating !== null}]" @click="rateClassNegative" :disabled="rating === 1">
         <font-awesome-icon :icon="['fas', 'thumbs-down']" />
         Não Gostei
       </button>
-      <button class="feedback positive">
+      <button :class="['feedback positive', {'feedback-disabled': rating === 0}, {'feedback-cursor-default': rating !== null}]" @click="rateClassPositive" :disabled="rating === 0">
         <font-awesome-icon :icon="['fas', 'thumbs-up']" />
         Gostei
       </button>
@@ -50,6 +50,7 @@ export default {
     return {
       loading: true,
       classContent: null,
+      rating: null,
     }
   },
   components: {
@@ -58,21 +59,77 @@ export default {
   methods: {
     async getContent() {
       api
-          .get(`/class/${this.$route.params.id}`)
-          .then(({data}) => {
-            this.classContent = data;
-            // this.$store.dispatch('setUser', data.name);
-            // this.$router.push({name: 'home'}) 
+        .get(`/class/${this.$route.params.id}`)
+        .then(({data}) => {
+          this.classContent = data;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+      
+      api
+        .get(`/rating/${this.$route.params.id}`,
+        {
+          headers: {
+            Authorization: this.userToken
+          }
+        })
+        .then(({data}) => {
+          this.rating = data.rating;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+        
+      this.loading = false;
+    },
+    async rateClassPositive() {
+      if (this.rating === null) {
+        api.post(`/rating/${this.$route.params.id}`, 
+          {
+            rating: 1
+          }, 
+          {
+            headers: {
+              Authorization: this.userToken
+            }
+          })
+          .then(() => {
+            this.rating = 1;
           })
           .catch((error) => {
               console.log(error);
           });
+      }
+    },
+    async rateClassNegative() {
+      if (this.rating === null) {
+        api.post(`/rating/${this.$route.params.id}`, 
+          {
+            rating: 0
+          }, 
+          {
+            headers: {
+              Authorization: this.userToken
+            }
+          })
+          .then(() => {
+            this.rating = 0;
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+      }
 
-      this.loading = false;
     }
   },
   created() {
     this.getContent();
+  },
+  computed: {
+    userToken() {
+      return this.$store.state.token
+    }
   }
 }
 </script>
@@ -144,6 +201,22 @@ export default {
         &:hover {
           background-color: #32373bd6;
           transition: background-color .15s ease-in-out;
+        }
+
+        &-cursor-default {
+          cursor: initial;
+
+          &:hover {
+            background-color: #32373b;
+          }
+        }
+        
+        &-disabled {
+          background: #808080;
+
+          &:hover {
+            background-color: #808080;
+          }
         }
       }
 

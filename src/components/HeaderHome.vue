@@ -51,13 +51,14 @@ export default {
       this.showMenu = !this.showMenu;
     },
     logout() {
-      this.$router.push({ name: 'login'})
+      this.$router.push({ name: 'login'});
+      this.$store.dispatch('setToken', '');
       this.$store.dispatch('setUser', '');
     }
   },
   computed: {
     userName() {
-        return this.$store.state.user
+      return this.$store.state.user
     }
   }
 }

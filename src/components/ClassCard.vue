@@ -114,15 +114,14 @@ export default {
 
     @media screen and (max-width: 600px) {
       &-text {
+        h2 {
+          font-size: 18px;
+        }
 
-      h2 {
-        font-size: 18px;
+        p {
+          font-size: 14px;
+        }
       }
-
-      p {
-        font-size: 14px;
-      }
-    }
     }
   }
 </style>

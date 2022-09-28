@@ -7,14 +7,14 @@
       <div class="search">
         <input 
           type="text"
-          placeholder="Pesquise pela palavra-chave"
+          placeholder="Pesquise pelo título"
           v-model="searchText"
         >
       </div>
 
       <div class="cards" v-if="!loading && cards && cards.length > 0">
         <ClassCard 
-          v-for="(card, index) in cards" 
+          v-for="(card, index) in filteredCards" 
           :key="index" 
           :id="card.id"
           :title="card.name" 
@@ -59,10 +59,7 @@ export default {
       api
           .get("/class")
           .then(({data}) => {
-            console.log(data.classes);
             this.cards = data.classes;
-            // this.$store.dispatch('setUser', data.name);
-            // this.$router.push({name: 'home'}) 
           })
           .catch((error) => {
               console.log(error);
@@ -83,16 +80,12 @@ export default {
         let filteredArray = [];
 
         this.cards.filter(card => {
-          card.data.key_field.map(tag => {
-            if (tag.key_text.includes(this.searchText.toLowerCase())) {
-              let found = filteredArray.some(el => el.id === card.id);
-              if (!found) {
-                filteredArray.push(card);
-              }
-            } else {
-              return this.cards;
-            }
-          })
+          console.log(card.name);
+          if (card.name.includes(this.searchText.toLowerCase())) {
+              filteredArray.push(card);
+          } else {
+            return this.cards;
+          }
         });
 
         return filteredArray;

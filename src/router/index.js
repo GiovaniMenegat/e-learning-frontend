@@ -18,6 +18,11 @@ const routes = [
     path: '/aula/:id',
     name: 'class',
     component: () => import('../views/Class/ClassView.vue')
+  },
+  {
+    path: '/seu-caminho',
+    name: 'dashboard',
+    component: () => import('../views/Dashboard/DashboardView.vue')
   }
 ]
 

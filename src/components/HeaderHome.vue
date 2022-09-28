@@ -3,7 +3,9 @@
     <img class="header-img" alt="e.learning logo" src="@/assets/elearning.png">
     
     <div class="header-right desktop">
-      <a href="#" class="header-about">Sobre nós</a>
+      <router-link class="header-about" to="/">Suas aulas</router-link>
+      
+      <router-link class="header-about" to="/seu-caminho">Seu caminho</router-link>
       
       <div @click="showLogoutMenu" @mouseleave="hideLogoutMenu">
         <p class="header-name">{{userName}}</p>
@@ -22,7 +24,9 @@
       <div class="menu-drodown" v-if="showMenu">
         <p>{{userName}}</p>
 
-        <a href="#">Sobre nós</a>
+        <router-link class="header-about" to="/">Suas aulas</router-link>
+        
+        <router-link to="/seu-caminho">Seu caminho</router-link>
 
         <a href="#" @click.prevent="logout">Sair</a>
 

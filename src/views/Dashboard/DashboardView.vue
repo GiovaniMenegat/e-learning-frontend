@@ -46,15 +46,27 @@
         <div class="courses" v-if="recommendation === 'Front-end'">
           <p>Para o front-end, recomendamos os cursos da Codecademy.</p>
 
-          <a href="https://join.codecademy.com/learn/learn-html/" target="_blank" rel="noopener noreferrer">Curso de HTML</a>
-          <a href="https://www.codecademy.com/learn/learn-css" target="_blank" rel="noopener noreferrer">Curso de CSS</a>
-          <a href="https://join.codecademy.com/learn/introduction-to-javascript/" target="_blank" rel="noopener noreferrer">Curso de Javascript</a>
+          <ul>
+            <li>
+              <a href="https://join.codecademy.com/learn/learn-html/" target="_blank" rel="noopener noreferrer">Curso de HTML</a>
+            </li>
+            <li>
+              <a href="https://www.codecademy.com/learn/learn-css" target="_blank" rel="noopener noreferrer">Curso de CSS</a>
+            </li>
+            <li>
+              <a href="https://join.codecademy.com/learn/introduction-to-javascript/" target="_blank" rel="noopener noreferrer">Curso de Javascript</a>
+            </li>
+          </ul>
         </div>
 
         <div class="courses" v-if="recommendation === 'Back-end'">
           <p>Para o back-end, recomendamos os cursos da Alura.</p>
 
-          <a href="https://www.alura.com.br/formacao-js-backend" target="_blank" rel="noopener noreferrer">Curso de formação JavaScript para back-end</a>
+          <ul>
+            <li>
+              <a href="https://www.alura.com.br/formacao-js-backend" target="_blank" rel="noopener noreferrer">Curso de formação JavaScript para back-end</a>
+            </li>
+          </ul>
         </div>
 
         <div class="courses" v-if="recommendation === 'Fullstack'">
@@ -65,11 +77,20 @@
             back-end.
           </p>
 
-          <a href="https://join.codecademy.com/learn/learn-html/" target="_blank" rel="noopener noreferrer">Curso de HTML</a>
-          <a href="https://www.codecademy.com/learn/learn-css" target="_blank" rel="noopener noreferrer">Curso de CSS</a>
-          <a href="https://join.codecademy.com/learn/introduction-to-javascript/" target="_blank" rel="noopener noreferrer">Curso de Javascript</a>
-
-          <a href="https://www.alura.com.br/formacao-js-backend" target="_blank" rel="noopener noreferrer">Curso de formação JavaScript para back-end</a>
+          <ul>
+            <li>
+              <a href="https://join.codecademy.com/learn/learn-html/" target="_blank" rel="noopener noreferrer">Curso de HTML</a>
+            </li>
+            <li>
+              <a href="https://www.codecademy.com/learn/learn-css" target="_blank" rel="noopener noreferrer">Curso de CSS</a>
+            </li>
+            <li>
+              <a href="https://join.codecademy.com/learn/introduction-to-javascript/" target="_blank" rel="noopener noreferrer">Curso de Javascript</a>
+            </li>
+            <li>
+              <a href="https://www.alura.com.br/formacao-js-backend" target="_blank" rel="noopener noreferrer">Curso de formação JavaScript para back-end</a>
+            </li>
+          </ul>
         </div>
         
       </div>
@@ -107,6 +128,8 @@ export default {
           this.showCourses = true;
         })
         .catch((error) => {
+          this.recommendation = null;
+          this.showCourses = false;
           this.message = error.response.data.message;
         });
     },
@@ -116,8 +139,10 @@ export default {
       }
     }
   },
-  mounted() {
-    this.getRecommendation();
+  watch: {
+    '$route'() {
+      this.getRecommendation();
+    }
   },
   computed: {
     userToken() {
@@ -169,6 +194,28 @@ export default {
 
           hr {
             height: 145px;
+          }
+        }
+
+        .courses {
+          p {
+            max-width: 600px;
+            margin: 0 auto;
+          }
+          ul {
+            li {
+              list-style: none;
+              margin: 20px 0;
+              a {
+                color: $pink;
+                text-decoration: none;
+
+                &:hover {
+                  text-decoration: underline;
+                  color: #fb3254;
+                }
+              }
+            }
           }
         }
       }

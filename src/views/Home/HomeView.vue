@@ -12,7 +12,7 @@
         >
       </div>
 
-      <div class="cards" v-if="!loading && cards && cards.length > 0">
+      <div class="cards" v-if="!loading && filteredCards && filteredCards.length > 0">
         <ClassCard 
           v-for="(card, index) in filteredCards" 
           :key="index" 
@@ -80,9 +80,8 @@ export default {
         let filteredArray = [];
 
         this.cards.filter(card => {
-          console.log(card.name);
-          if (card.name.includes(this.searchText.toLowerCase())) {
-              filteredArray.push(card);
+          if (card.name.toLowerCase().includes(this.searchText.toLowerCase())) {
+            filteredArray.push(card);
           } else {
             return this.cards;
           }

@@ -7,21 +7,16 @@
         <p>Voltar</p>
       </router-link>
 
-      <button class="done-button">
-        <font-awesome-icon :icon="['fas', 'check']" />
-        Concluído
-      </button>
-    </div>
-
-    <div class="top-buttons feedback-button-div">
-      <button :class="['feedback negative', {'feedback-disabled': rating === 1}, {'feedback-cursor-default': rating !== null}]" @click="rateClassNegative" :disabled="rating === 1">
-        <font-awesome-icon :icon="['fas', 'thumbs-down']" />
-        Não Gostei
-      </button>
-      <button :class="['feedback positive', {'feedback-disabled': rating === 0}, {'feedback-cursor-default': rating !== null}]" @click="rateClassPositive" :disabled="rating === 0">
-        <font-awesome-icon :icon="['fas', 'thumbs-up']" />
-        Gostei
-      </button>
+      <div class="feedback-button-div">
+        <button :class="['feedback negative', {'feedback-disabled': rating === 1}, {'feedback-cursor-default': rating !== null}]" @click="rateClassNegative" :disabled="rating === 1">
+          <font-awesome-icon :icon="['fas', 'thumbs-down']" />
+          Não Gostei
+        </button>
+        <button :class="['feedback positive', {'feedback-disabled': rating === 0}, {'feedback-cursor-default': rating !== null}]" @click="rateClassPositive" :disabled="rating === 0">
+          <font-awesome-icon :icon="['fas', 'thumbs-up']" />
+          Gostei
+        </button>
+      </div>
     </div>
 
     <div v-if="loading" class="class-body">
@@ -78,6 +73,7 @@ export default {
           this.rating = data.rating;
         })
         .catch((error) => {
+          this.rating = null;
             console.log(error);
         });
         
@@ -181,7 +177,9 @@ export default {
     }
 
     .feedback-button-div {
-      justify-content: flex-end;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
       svg {
         margin-right: 8px;

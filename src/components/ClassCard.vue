@@ -2,7 +2,7 @@
   <router-link class="router-link" :to="`/aula/${id}`">
     <div :class="['class-card', {'class-card-positive-border': rating?.rating === 1, 'class-card-negative-border': rating?.rating === 0, 'class-card-undefined-border': rating === undefined}]">
 
-      <div class="class-card-rating">
+      <div :class="['class-card-rating', {'class-card-rating-positive': rating?.rating === 1, 'class-card-rating-negative': rating?.rating === 0, 'class-card-rating-undefined': rating === undefined}]">
         <font-awesome-icon :icon="['fas', 'circle-question']" v-if="rating === undefined"/>
         <font-awesome-icon :icon="['fas', 'thumbs-up']" v-if="rating?.rating === 1"/>
         <font-awesome-icon :icon="['fas', 'thumbs-down']" v-if="rating?.rating === 0"/>
@@ -76,9 +76,20 @@ export default {
       top: 30px;
       right: 30px;
       font-size: 20px;
-      color: #ff5471;
-    }
 
+      &-positive {
+        color: $success;
+      }
+
+      &-negative {
+        color: $error;
+      }
+
+      &-undefined {
+        color: #858585;
+      }
+    }
+    
     &-positive-border {
       border: 3px solid $success;
     }

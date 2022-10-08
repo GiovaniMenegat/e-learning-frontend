@@ -58,18 +58,18 @@ export default {
   methods: {
     async getContent() {
       api
-          .get("/class",
-          {
-            headers: {
-              Authorization: this.userToken
-            }
-          })
-          .then(({data}) => {
-            this.cards = data.classes;
-          })
-          .catch((error) => {
-              console.log(error);
-          });
+        .get("/class",
+        {
+          headers: {
+            Authorization: this.userToken
+          }
+        })
+        .then(({data}) => {
+          this.cards = data.classes;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 
       this.loading = false;
     }

@@ -3,9 +3,9 @@
     <img class="header-img" alt="e.learning logo" src="@/assets/elearning.png">
     
     <div class="header-right desktop">
-      <router-link class="header-about" to="/">Suas aulas</router-link>
+      <router-link :class="['header-item', {'header-active': $route.path == '/'}]" to="/">Suas aulas</router-link>
       
-      <router-link class="header-about" to="/seu-caminho">Seu caminho</router-link>
+      <router-link :class="['header-item', {'header-active': $route.path == '/seu-caminho'}]" to="/seu-caminho">Seu caminho</router-link>
       
       <div @click="showLogoutMenu" @mouseleave="hideLogoutMenu">
         <p class="header-name">{{userName}}</p>
@@ -24,9 +24,9 @@
       <div class="menu-drodown" v-if="showMenu">
         <p>{{userName}}</p>
 
-        <router-link class="header-about" to="/">Suas aulas</router-link>
+        <router-link :class="['header-item', {'header-active': $route.path == '/'}]" to="/">Suas aulas</router-link>
         
-        <router-link to="/seu-caminho">Seu caminho</router-link>
+        <router-link :class="['header-item', {'header-active': $route.path == '/seu-caminho'}]" to="/seu-caminho">Seu caminho</router-link>
 
         <a href="#" @click.prevent="logout">Sair</a>
 
@@ -97,7 +97,12 @@ export default {
         }
       }
       
-      .header-about {
+      .router-link-exact-active  {
+        font-weight: 600 !important;
+        text-decoration: underline !important;
+      }
+      
+      .header-item {
         margin-right: 64px;
         text-decoration: none;
         color: $font;
@@ -166,6 +171,13 @@ export default {
       .mobile {
         display: block;
       }
+
+      &-right {
+        .header-item {
+          margin-right: 0;
+        }
+      }
+      
     }
   }
 </style>

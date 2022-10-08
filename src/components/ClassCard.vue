@@ -1,6 +1,13 @@
 <template>
   <router-link class="router-link" :to="`/aula/${id}`">
-    <div class="class-card">
+    <div :class="['class-card', {'class-card-positive-border': rating?.rating === 1, 'class-card-negative-border': rating?.rating === 0, 'class-card-undefined-border': rating === undefined}]">
+
+      <div class="class-card-rating">
+        <font-awesome-icon :icon="['fas', 'circle-question']" v-if="rating === undefined"/>
+        <font-awesome-icon :icon="['fas', 'thumbs-up']" v-if="rating?.rating === 1"/>
+        <font-awesome-icon :icon="['fas', 'thumbs-down']" v-if="rating?.rating === 0"/>
+      </div>
+      
       <div class="class-card-img">
         <img :src="require(`@/assets/${image}.svg`)" :alt="`${title}`">
       </div>
@@ -8,15 +15,6 @@
       <div class="class-card-text">
         <h2>{{title}}</h2>
         <p>{{content}}</p>
-
-        <div class="class-card-key-text">
-          <!-- <p 
-            v-for="(key, index) in keyTexts" 
-            :key="index"
-          >
-            {{key.key_text}}
-          </p> -->
-        </div>
 
       </div>
     </div>
@@ -35,18 +33,20 @@ export default {
   props: {
     id: Number,
     title: String,
-    // image: Object,
+    rating: Object,
     content: String,
     keyTexts: String
   }
 }
 </script>
 <style lang="scss">
+  @import "../styles/layout/globals";
   .class-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
     
+    position: relative;
     max-width: 870px;
     min-height: 187px;
     margin: 30px;
@@ -69,6 +69,26 @@ export default {
     &:hover {
       -webkit-transform: scale(1.03);
       transform: scale(1.03);
+    }
+
+    &-rating {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 20px;
+      color: #ff5471;
+    }
+
+    &-positive-border {
+      border: 3px solid $success;
+    }
+
+    &-negative-border {
+      border: 3px solid $error;
+    }
+
+    &-undefined-border {
+      border: 3px solid #858585;
     }
 
     &-img {
@@ -113,6 +133,10 @@ export default {
     }
 
     @media screen and (max-width: 600px) {
+      &-rating {
+        top: 20px;
+        right: 20px;
+      }
       &-text {
         h2 {
           font-size: 18px;

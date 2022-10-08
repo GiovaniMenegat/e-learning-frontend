@@ -225,7 +225,7 @@ export default {
       &-body {
         .steps {
           hr {
-            height: 1px;
+            height: 1px !important;
             width: 200px;
             margin: 30px 0;
           }

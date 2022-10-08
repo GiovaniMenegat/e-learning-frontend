@@ -25,10 +25,12 @@
     
     <div v-if="!loading" class="class-body">
       <h2>{{classContent && classContent.name}}</h2>
-      
-      <iframe width="420" height="315"
-        :src="`https://www.youtube.com/embed/${classContent && classContent.video_id}`">
-      </iframe>
+
+      <div class="video-container">
+        <iframe width="420" height="315"
+          :src="`https://www.youtube.com/embed/${classContent && classContent.video_id}`">
+        </iframe>
+      </div>
 
       <p>{{classContent && classContent.description}}</p>
     </div>
@@ -231,10 +233,42 @@ export default {
         font-size: 48px;
       }
 
-      iframe {
-        width: 700px;
-        height: 500px;
-        margin: 60px;
+      .video-container {
+        overflow: hidden;
+        position: relative;
+        width:100%;
+        margin: 60px auto;
+        max-width: 700px;
+      }
+
+      .video-container::after {
+        padding-top: 56.25%;
+        display: block;
+        content: '';
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    @media screen and (max-width: 890px) {
+      &-body {
+        margin: 30px;
+
+        h2 {
+          font-size: 32px;
+        }
+
+      }
+    }
+    @media screen and (max-width: 450px) {
+      .top-buttons {
+        flex-direction: column;
       }
     }
   }

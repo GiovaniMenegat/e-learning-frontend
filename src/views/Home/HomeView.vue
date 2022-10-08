@@ -20,6 +20,7 @@
           :title="card.name" 
           :content="card.description"
           :keyTexts="card.tags"
+          :rating="card.ratings[0]"
         />
       </div>
 
@@ -57,14 +58,18 @@ export default {
   methods: {
     async getContent() {
       api
-          .get("/class")
+          .get("/class",
+          {
+            headers: {
+              Authorization: this.userToken
+            }
+          })
           .then(({data}) => {
             this.cards = data.classes;
           })
           .catch((error) => {
               console.log(error);
           });
-      
 
       this.loading = false;
     }
@@ -89,6 +94,9 @@ export default {
 
         return filteredArray;
       }
+    },
+    userToken() {
+      return this.$store.state.token
     }
   }
 }

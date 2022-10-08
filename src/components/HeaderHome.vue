@@ -174,7 +174,7 @@ export default {
 
       &-right {
         .header-item {
-          margin-right: 0;
+          margin: 7px 0;
         }
       }
       

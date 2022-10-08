@@ -139,6 +139,9 @@ export default {
       }
     }
   },
+  mounted() {
+    this.getRecommendation();
+  },
   watch: {
     '$route'() {
       this.getRecommendation();

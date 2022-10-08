@@ -74,8 +74,13 @@ export default {
       this.loading = false;
     }
   },
-  created() {
+  mounted() {
     this.getContent();
+  },
+  watch: {
+    '$route'() {
+      this.getContent();
+    }
   },
   computed: {
     filteredCards() {

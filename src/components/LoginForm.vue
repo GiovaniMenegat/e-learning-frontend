@@ -13,6 +13,8 @@
         <span v-if="!$v.password.minLength && $v.password.$dirty" class="field-error">A senha precisa ter no mínimo {{ $v.password.$params.minLength.min }} caracteres</span>
     </div>
 
+    <h6 v-if="errorMessage" class="login-error">{{errorMessage}}</h6>
+    
     <button @click.prevent="login" class="animate pop delay-3 login-button">
         Entrar
     </button>
@@ -30,7 +32,8 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      errorMessage: ''
     }
   },
   props: {
@@ -51,18 +54,17 @@ export default {
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
-        console.log(`Email: ${this.email}, Password: ${this.password}`);
+        this.$v.$reset();
 
         api
           .post("/user/login", {email: this.email, password: this.password})
           .then(({data}) => {
-            console.log(data);
             this.$store.dispatch('setUser', data.name);
             this.$store.dispatch('setToken', data.token);
             this.$router.push({name: 'home'}) 
           })
-          .catch((error) => {
-              console.log(error);
+          .catch(({response}) => {
+              this.errorMessage = response.data.message;
           });
         
       }

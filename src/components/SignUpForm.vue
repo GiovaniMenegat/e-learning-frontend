@@ -67,7 +67,7 @@ export default {
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
-        console.log(`Name: ${this.name}, Email: ${this.email}, Password: ${this.password}`);
+        this.$v.$reset();
 
         api
           .post("/user", {name: this.name, email: this.email, password: this.password})

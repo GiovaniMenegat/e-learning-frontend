@@ -13,9 +13,7 @@
         <span v-if="!$v.password.minLength && $v.password.$dirty" class="field-error">A senha precisa ter no mínimo {{ $v.password.$params.minLength.min }} caracteres</span>
     </div>
 
-    <a href="#" class="forgot-password animate pop delay-2">Esqueci minha senha</a>
-
-    <button @click.prevent="login" class="animate pop delay-3">
+    <button @click.prevent="login" class="animate pop delay-3 login-button">
         Entrar
     </button>
 

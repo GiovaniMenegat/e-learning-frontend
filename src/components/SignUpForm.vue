@@ -7,14 +7,14 @@
 
     <div :class="['name animate pop delay-1', {'form-group--error': $v.name.$error}]">
         <label for="name">Usuário</label>
-        <input type="text" id="name" name="name" v-model="name" :class="{ 'input-error': (!$v.name.required || !$v.name.alpha) && $v.name.$dirty }">
-        <span v-if="(!$v.name.required || !$v.name.alpha) && $v.name.$dirty" class="field-error">Nome inválido</span>
+        <input type="text" id="name" name="name" v-model="name" :class="{ 'input-error': !$v.name.required && $v.name.$dirty }">
+        <span v-if="!$v.name.required && $v.name.$dirty" class="field-error">Nome inválido</span>
     </div>
 
     <div :class="['email animate pop delay-2', { 'form-group--error': $v.email.$error }]">
         <label for="email">E-mail</label>
-        <input type="text" id="email" name="email" v-model="email" :class="{ 'input-error': (!$v.email.required || !$v.email.alpha) && $v.email.$dirty }">
-        <span v-if="(!$v.email.required || !$v.email.alpha) && $v.email.$dirty" class="field-error">E-mail inválido</span>
+        <input type="text" id="email" name="email" v-model="email" :class="{ 'input-error': (!$v.email.required || !$v.email.email) && $v.email.$dirty }">
+        <span v-if="(!$v.email.required || !$v.email.email) && $v.email.$dirty" class="field-error">E-mail inválido</span>
     </div>
 
     <div :class="['password animate pop delay-3', { 'form-group--error': $v.password.$error }]">
@@ -24,6 +24,8 @@
         <span v-if="!$v.password.minLength && $v.password.$dirty" class="field-error">A senha precisa ter no mínimo {{ $v.password.$params.minLength.min }} caracteres</span>
     </div>
 
+    <h6 v-if="errorMessage" class="login-error">{{errorMessage}}</h6>
+    
     <button @click.prevent="signUp" class="sign-up-button animate pop delay-4">
         Cadastrar
     </button>
@@ -31,7 +33,7 @@
 </template>
 
 <script>
-import { required, minLength, email, alpha } from 'vuelidate/lib/validators';
+import { required, minLength, email } from 'vuelidate/lib/validators';
 import api from "@/services/api";
 
 export default {
@@ -40,7 +42,8 @@ export default {
     return {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      errorMessage: ''
     }
   },
   props: {
@@ -49,7 +52,6 @@ export default {
   validations: {
     name: {
       required,
-      alpha,
       minLength: minLength(4)
     },
     email: {
@@ -63,7 +65,6 @@ export default {
   },
   methods: {
     signUp() {
-      console.log('cadastrou');
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
@@ -74,8 +75,8 @@ export default {
           .then(() => {
             this.$emit('toggle-form');
           })
-          .catch((error) => {
-              console.log(error);
+          .catch(({response}) => {
+            this.errorMessage = response.data.message;
           });
         
       }

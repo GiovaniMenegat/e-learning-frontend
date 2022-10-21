@@ -51,8 +51,7 @@ export default {
   },
   validations: {
     name: {
-      required,
-      minLength: minLength(4)
+      required
     },
     email: {
       required,
